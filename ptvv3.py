@@ -31,7 +31,7 @@ class PTVv3:
             print(url)
         
         response = requests.get(url)
-        assert response.status_code == 200
+        response.raise_for_status()
         return response.json()
 
 
