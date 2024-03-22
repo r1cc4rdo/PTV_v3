@@ -37,7 +37,7 @@ Intuitively, these are the API concepts:
 * A *[run](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Runs)* represents a vehicle (bus, tram, train, *etc*) travelling along a *[route](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Routes)* in a *[direction](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Directions)*.
 * A *[departure](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Departures)* gives the planned and predicted time (if available) of a *[run](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Runs)*.
 
-The API also provides information regarding service *[disruptions](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Disruptions)*, *[fare estimates](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/FareEstimate)*, and [station facilities](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops).
+The API also provides information regarding service *[disruptions](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Disruptions)*, *[fare estimates](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/FareEstimate)*, and *[station facilities](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops)*.
 
 ## Example notebook
 !(image)
@@ -63,3 +63,9 @@ Tracking via PTV API can be unreliable
 * [venturabus](https://www.venturabus.com.au/live-tracking/details/142/oakleigh-box-hill-via-clayton-monash-university-mt-waverley#)
 * [Busminder](https://maps.busminder.com.au/route/live/D2CAE095-483D-46A7-B4AD-09A6F97618F3)
 * [venturabus live tracking](https://www.venturabus.com.au/live-tracking)
+
+## ToDos
+use full ptvv3, not minimal
+check with openapi
+debug flag
+support for arrays
