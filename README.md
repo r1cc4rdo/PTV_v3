@@ -35,9 +35,9 @@ You will need to obtain [your own id/key pair](https://www.ptv.vic.gov.au/assets
 Intuitively, these are the API concepts:
 * A *[route](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Routes)* is an ordered collection of *[stops](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops)* that can run in one or more *[directions](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Directions)*.
 * A *[run](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Runs)* represents a vehicle (bus, tram, train, *etc*) travelling along a *[route](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Routes)* in a *[direction](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Directions)*.
-* A *[departure](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Departures)* gives the planned and predicted time (if available) of a *[run](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Runs)*.
+* A *[departure](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Departures)* gives the planned and predicted time (if available) of passing through a *[stop](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops)*.
 
-The API also provides information regarding service *[disruptions](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Disruptions)*, *[fare estimates](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/FareEstimate)*, and *[station facilities](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops)*.
+The API also provides information regarding service *[disruptions](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Disruptions)*, *[fare estimates](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/FareEstimate)* and *[station facilities](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops)*.
 
 ## Example notebook
 !(image)
