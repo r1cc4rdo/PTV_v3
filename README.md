@@ -53,7 +53,7 @@ PTV API for live tracking of buses has been occasionally unreliable, not returni
 
 Ventura's own [live tracker](https://www.venturabus.com.au/live-tracking) does not have an API but has been historically more dependable. It appears to either share or piggyback on tracking technology from [BusMinder](https://www.busminder.com.au), which does not have a public-facing API either.
 
-The tracking devices on buses are produced by [Smartrak](https://smartrak.com), and transmit GPS coordinate over the 4G cellular network. The device model most likely installed on vehicles is a [Smartrak OBD II](https://go.smartrak.com/rs/040-SMS-890/images/PDF-Product-Brochure-1199-OBD-II.pdf).
+The tracking devices on buses are produced by [Smartrak](https://smartrak.com), and transmit GPS coordinate over the 4G cellular network. The device model most likely installed on buses is a [Smartrak OBD II](https://go.smartrak.com/rs/040-SMS-890/images/PDF-Product-Brochure-1199-OBD-II.pdf).
 
 ## Links
 * [PTV Timetable API website](https://www.ptv.vic.gov.au/footer/data-and-reporting/datasets/ptv-timetable-api)
@@ -69,3 +69,4 @@ The tracking devices on buses are produced by [Smartrak](https://smartrak.com), 
 * check with openapi
 * debug flag
 * support for arrays
+* the full implementation shares the same interface but validates the request against the OpenApi schema prior to executing and provides better error reporting in case of failure
