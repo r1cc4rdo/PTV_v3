@@ -33,39 +33,39 @@ You will need to obtain [your own id/key pair](https://www.ptv.vic.gov.au/assets
 
 ## API model
 Intuitively, these are the API concepts:
-* A *[route](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Routes)* is an ordered collection of *[stops](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops)* that can run in one or more *[directions](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Directions)*.
-* A *[run](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Runs)* represents a vehicle (bus, tram, train, *etc*) travelling along a *[route](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Routes)* in a *[direction](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Directions)*.
-* A *[departure](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Departures)* gives the planned and predicted time (if available) of passing through a *[stop](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops)*.
+* a *[route](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Routes)* is an ordered collection of *[stops](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops)* that can run in one or more *[directions](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Directions)*;
+* a *[run](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Runs)* represents a vehicle (bus, tram, train, *etc*) travelling along a *[route](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Routes)* in a *[direction](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Directions)*;
+* a *[departure](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Departures)* gives the planned and predicted time (if available) of passing through a *[stop](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops)*.
 
 The API also provides information regarding service *[disruptions](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Disruptions)*, *[fare estimates](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/FareEstimate)* and *[station facilities](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops)*.
 
 ## Example notebook
 !(image)
 
-## Technical details
-PTV provides services through third-party companies
+## Tracking information
+What follows are unverified educated guesses. If you have any better information, ideally firsthand, I'd like to [hear from you](https://github.com/r1cc4rdo/PTV_v3/discussions)!
 
-Buses are provided via Ventura, which has it's own fleet tracking website
+PTV typically provides each transport modality through bespoke entities. For example, in the Melbourne area:
+* trains are handled by [Metro Trains](https://www.metrotrains.com.au/) and
+* buses are provided by [Ventura](https://www.venturabus.com.au/).
 
-Ventura appears to piggyback on Busminder for its tracking services
+PTV API for live tracking of buses has been occasionally unreliable, not returning a ```vehicle_position``` structure for otherwise active vehicles.
 
-Tracking for buses appears to be implemented via Smartrak
+Ventura's own [live tracker](https://www.venturabus.com.au/live-tracking) does not have an API but has been historically more dependable. It appears to either share or piggyback on tracking technology from [Busminder](https://www.busminder.com.au), which does not have a public-facing API either.
 
-The most likely device used is a Smartrak OBD II
-
-Tracking via PTV API can be unreliable
+The tracking devices on buses are produced by [Smartrak](https://smartrak.com), and transmit GPS coordinate over the 4G cellular network. The device most likely installed on vehicles is a [Smartrak OBD II](https://go.smartrak.com/rs/040-SMS-890/images/PDF-Product-Brochure-1199-OBD-II.pdf).
 
 ## Links
-* [PTV Timetable API website](https://www.ptv.vic.gov.au/footer/data-and-reporting/datasets/ptv-timetable-api/)
-* [PTV Timetable API documentation](https://timetableapi.ptv.vic.gov.au/swagger/ui/index) (using [Swagger UI](https://swagger.io/))
+* [PTV Timetable API website](https://www.ptv.vic.gov.au/footer/data-and-reporting/datasets/ptv-timetable-api)
+* [PTV Timetable API documentation](https://timetableapi.ptv.vic.gov.au/swagger/ui/index)
+* [Ventura](https://www.venturabus.com.au) and their [live tracking](https://www.venturabus.com.au/live-tracking/details/142/oakleigh-box-hill-via-clayton-monash-university-mt-waverley#)
+* [BusMinder](https://www.busminder.com.au) and their [live tracking](https://maps.busminder.com.au/route/live/D2CAE095-483D-46A7-B4AD-09A6F97618F3)
 * [Smartrak](https://smartrak.com)
-* [Smartrak OBD II brochure](https://go.smartrak.com/rs/040-SMS-890/images/PDF-Product-Brochure-1199-OBD-II.pdf)
-* [venturabus](https://www.venturabus.com.au/live-tracking/details/142/oakleigh-box-hill-via-clayton-monash-university-mt-waverley#)
-* [Busminder](https://maps.busminder.com.au/route/live/D2CAE095-483D-46A7-B4AD-09A6F97618F3)
-* [venturabus live tracking](https://www.venturabus.com.au/live-tracking)
+* [PTV Journey planner](https://www.ptv.vic.gov.au/journey)
+
 
 ## ToDos
-use full ptvv3, not minimal
-check with openapi
-debug flag
-support for arrays
+* use full ptvv3, not minimal
+* check with openapi
+* debug flag
+* support for arrays
