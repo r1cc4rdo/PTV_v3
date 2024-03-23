@@ -1,7 +1,7 @@
 # Public Transport Victoria (PTV) Timetable API v3
 The [PTV Timetable API](https://www.ptv.vic.gov.au/footer/data-and-reporting/datasets/ptv-timetable-api/) provides programmatic access to public transport data for the state of Victoria, Australia.
 
-Here's a [minimal implementation](https://github.com/r1cc4rdo/PTV_v3/blob/main/ptvv3.py):
+Here's a [minimal implementation](https://github.com/r1cc4rdo/PTV_v3/blob/main/ptvv3.py) with no dependencies:
 ``` python
 import requests
 import hashlib
