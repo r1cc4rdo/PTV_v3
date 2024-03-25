@@ -55,6 +55,56 @@ Ventura's own [live tracker](https://www.venturabus.com.au/live-tracking) does n
 
 The tracking devices on buses are produced by [Smartrak](https://smartrak.com), and transmit GPS coordinate over the 4G cellular network. The device model most likely installed on buses is a [Smartrak OBD II](https://go.smartrak.com/rs/040-SMS-890/images/PDF-Product-Brochure-1199-OBD-II.pdf).
 
+## API url and schema validation
+The PTV API OpenAPI schema can be downloaded with:
+``` bash
+wget http://timetableapi.ptv.vic.gov.au/swagger/docs/v3 -O ptv_api_spec.json
+```
+The OpenAPI specification version used in it is *2.0*. The *v3* on the website and documentation refers to the revision of the PTV API!
+
+The schema is unfortunately [not valid](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/FareEstimate/FareEstimate_GetFareEstimateByZone:~:text=%3Cspan%20class%3D%22strong%22%3EV3.FareEstimateResponse%20is%20not%20defined!%3C/span%3E). It can be made to pass validation by applying the following superficial patch:
+``` bash
+cat ptv_api_spec.json | python -m json.tool > prettyprinted.json
+```
+``` patch
+--- prettyprinted.json	2024-03-26 01:38:49
++++ modified.json	2024-03-26 01:39:11
+@@ -3571,6 +3571,23 @@
+                 }
+             }
+         },
++        "V3.FareEstimateResponse": {
++            "type": "object",
++            "properties": {
++                "fare_estimate": {
++                    "$ref": "#/definitions/V3.FareEstimate",
++                    "description": "Resultant set fare estimates"
++                },
++                "status": {
++                    "$ref": "#/definitions/V3.Status",
++                    "description": "API Status / Metadata"
++                }
++            }
++        },
++        "V3.FareEstimate": {
++            "type": "object",
++            "properties": {}
++        },
+         "V3.Disruptions": {
+             "type": "object",
+             "properties": {
+```
+Using tools like [openapi-core](https://github.com/python-openapi/openapi-core) (OpenAPI v3) or [Flex](https://github.com/pipermerriam/flex) (OpenAPI v2), is then possible to validate a url prior to making a request:
+``` python
+from requests import Request
+from flex.core import load, validate_api_request, normalize_request
+
+schema = load('ptv_api_spec.json')
+request = Request('GET', 'https://timetableapi.ptv.vic.gov.au/v3/route_types')
+validate_request(normalize_request(request.prepare()), schema)
+```
+The validation code above is supposed to check the compliance of both url path and parameters, but only works properly for the first.
+
 ## Links
 * [PTV Timetable API website](https://www.ptv.vic.gov.au/footer/data-and-reporting/datasets/ptv-timetable-api)
 * [PTV Timetable API documentation](https://timetableapi.ptv.vic.gov.au/swagger/ui/index)
@@ -62,11 +112,3 @@ The tracking devices on buses are produced by [Smartrak](https://smartrak.com), 
 * [BusMinder](https://www.busminder.com.au) and their [live tracking](https://maps.busminder.com.au/route/live/D2CAE095-483D-46A7-B4AD-09A6F97618F3)
 * [Smartrak](https://smartrak.com)
 * [PTV Journey planner](https://www.ptv.vic.gov.au/journey)
-
-
-## ToDos
-* use full ptvv3, not minimal
-* check with openapi
-* debug flag
-* support for arrays
-* the full implementation shares the same interface but validates the request against the OpenApi schema prior to executing and provides better error reporting in case of failure
