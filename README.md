@@ -70,7 +70,7 @@ wget http://timetableapi.ptv.vic.gov.au/swagger/docs/v3 -O ptv_api_spec.json
 ```
 The OpenAPI specification version used in it is *2.0*. The *v3* on the website and documentation refers to the revision of the PTV API!
 
-The schema is unfortunately [not valid](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/FareEstimate/FareEstimate_GetFareEstimateByZone:~:text=%3Cspan%20class%3D%22strong%22%3EV3.FareEstimateResponse%20is%20not%20defined!%3C/span%3E). It can be made to pass validation by applying the following superficial patch:
+The schema is [not valid](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/FareEstimate/FareEstimate_GetFareEstimateByZone:~:text=%3Cspan%20class%3D%22strong%22%3EV3.FareEstimateResponse%20is%20not%20defined!%3C/span%3E). It can be made to pass validation by applying the following superficial patch:
 ``` bash
 cat ptv_api_spec.json | python -m json.tool > prettyprinted.json
 ```
