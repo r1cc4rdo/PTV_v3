@@ -130,7 +130,7 @@ plot_gps_map(stops_info, routes_info)
 
 
     
-![png](output_9_0.png)
+![png](stops.png)
     
 
 
@@ -217,6 +217,6 @@ plot_bus_map(stops, runs, stop_id)
 
 
     
-![png](output_15_0.png)
+![png](buses.png)
     
 
