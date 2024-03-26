@@ -120,3 +120,6 @@ The validation code above is supposed to check the compliance of both url path a
 * [BusMinder](https://www.busminder.com.au) and their [live tracking](https://maps.busminder.com.au/route/live/D2CAE095-483D-46A7-B4AD-09A6F97618F3)
 * [Smartrak](https://smartrak.com)
 * [PTV Journey planner](https://www.ptv.vic.gov.au/journey)
+
+## Todo
+* Test v2 endpoints, *e.g.* ```/v2/healthcheck```
