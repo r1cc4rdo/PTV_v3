@@ -102,7 +102,7 @@ cat ptv_api_spec.json | python -m json.tool > prettyprinted.json
              "type": "object",
              "properties": {
 ```
-Using tools like [openapi-core](https://github.com/python-openapi/openapi-core) (OpenAPI v3) or [Flex](https://github.com/pipermerriam/flex) (OpenAPI v2), is then possible to validate a url prior to making a request:
+Using tools like [openapi-core](https://github.com/python-openapi/openapi-core) (OpenAPI v3) or [Flex](https://github.com/pipermerriam/flex) (OpenAPI v2) it's then possible to validate a url prior to making a request:
 ``` python
 from requests import Request
 from flex.core import load, validate_api_request, normalize_request
@@ -113,6 +113,7 @@ validate_request(normalize_request(request.prepare()), schema)
 ```
 The validation code above is supposed to check the compliance of both url path and parameters, but only works properly for the first.
 
+## Timetable API v2 support
 In theory, this code should be able to support *v2* of the Timetable API (*e.g.* ```ptv('v2/healthcheck')```), which is still advertised on PTV's website, but I had no luck with either *http* or *https* protocols. Support for *v2* might be discontinued.
 
 ## Links
