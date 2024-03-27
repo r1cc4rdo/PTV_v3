@@ -114,7 +114,7 @@ validate_request(normalize_request(request.prepare()), schema)
 The validation code above is supposed to check the compliance of both url path and parameters, but only works properly for the first.
 
 ## Timetable API v2 support
-In theory, this code should be able to support *v2* of the Timetable API (*e.g.* ```ptv('v2/healthcheck')```), which is still advertised on PTV's website, but I had no luck with either *http* or *https* protocols. Support for *v2* might be discontinued.
+In theory, this code should be able to support *v2* of the Timetable API (*e.g.* ```ptv('v2/healthcheck')```), which is still advertised on PTV's website, but I had no luck with either *http* or *https* protocols. Support for *v2* might have been discontinued.
 
 ## Links
 * [PTV Timetable API website](https://www.ptv.vic.gov.au/footer/data-and-reporting/datasets/ptv-timetable-api)
