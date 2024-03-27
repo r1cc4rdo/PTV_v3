@@ -8,8 +8,8 @@ class PTVv3:
     Minimal implementation of the Public Transport Victoria (PTV) v3 API.
     For documentation and instructions to obtain an id/key pair please visit:
     https://www.ptv.vic.gov.au/footer/data-and-reporting/datasets/ptv-timetable-api
+    This file is part of the https://github.com/r1cc4rdo/PTV_v3 repository.
     """
-    
     base_url = 'https://timetableapi.ptv.vic.gov.au'
 
     def __init__(self, ptv_id, ptv_key, debug=False):
