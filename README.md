@@ -53,13 +53,13 @@ The notebook is also available in [markdown](media/notebook.md) and [PDF](media/
 ## Tracking information
 What follows are unverified educated guesses. If you have any better information, ideally firsthand, I'd like to [hear from you](https://github.com/r1cc4rdo/PTV_v3/discussions)!
 
-PTV typically provides each transport modality through bespoke entities. For example, in the Melbourne area:
+PTV provides each transport modality through several [operators](https://www.ptv.vic.gov.au/footer/customer-service/operator-contact-details/). For example, in the Melbourne area:
 * trains are handled by [Metro Trains](https://www.metrotrains.com.au/) and
 * buses are provided by [Ventura](https://www.venturabus.com.au/).
 
 PTV API for live tracking of buses has been occasionally unreliable, not returning a ```vehicle_position``` structure for otherwise active vehicles.
 
-Ventura's own [live tracker](https://www.venturabus.com.au/live-tracking) does not have an API but has been historically more dependable. It appears to either share or piggyback on tracking technology from [BusMinder](https://www.busminder.com.au), which does not have a public-facing API either.
+Ventura's own [live tracker](https://www.venturabus.com.au/live-tracking) does not have an API but has been historically more dependable. It appears to either share or piggyback on tracking technology from [BusMinder](https://www.busminder.com.au), which does not have a public-facing API either. Both the [web tracker](https://www.venturabus.com.au/live-tracking) and the [app](https://play.google.com/store/apps/details?id=com.busminderexpress.ventura) can only display the [company's services](https://www.venturabus.com.au/contact-us/faq#:~:text=Why%20isn%E2%80%99t%20my%20bus%20route%20on%20the%20Ventura%20Tracker%20app%3F); several weekend routes are served by [different operators](https://www.ptv.vic.gov.au/footer/customer-service/operator-contact-details/).
 
 The tracking devices on buses are produced by [Smartrak](https://smartrak.com), and transmit GPS coordinate over the 4G cellular network. The device model most likely installed on buses is a [Smartrak OBD II](https://go.smartrak.com/rs/040-SMS-890/images/PDF-Product-Brochure-1199-OBD-II.pdf).
 
