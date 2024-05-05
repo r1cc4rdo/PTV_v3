@@ -105,7 +105,7 @@ cat ptv_api_spec.json | python -m json.tool > prettyprinted.json
 Using tools like [openapi-core](https://github.com/python-openapi/openapi-core) (OpenAPI v3) or [Flex](https://github.com/pipermerriam/flex) (OpenAPI v2) it's then possible to validate a url prior to making a request:
 ``` python
 from requests import Request
-from flex.core import load, validate_api_request, normalize_request
+from flex.core import load, validate_request, normalize_request
 
 schema = load('ptv_api_spec.json')
 request = Request('GET', 'https://timetableapi.ptv.vic.gov.au/v3/route_types')
