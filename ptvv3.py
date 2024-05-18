@@ -24,7 +24,11 @@ class PTVv3:
         Returns the JSON encoded response.
         """
         params['devid'] = self.id
-        request = f'{endpoint}?{"&".join(f"{k}={v}" for k, v in params.items())}'
+        encoded = [f'{k}={v}'
+                   for k, vs in params.items()
+                   for v in (vs if isinstance(vs, (list, tuple)) else [vs])]
+        
+        request = f'{endpoint}?{"&".join(encoded)}'
         hashed = hmac.new(self.key, request.encode('utf-8'), hashlib.sha1)
         url = f'{PTVv3.base_url}{request}&signature={hashed.hexdigest()}'
         if self.debug:
