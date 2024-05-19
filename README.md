@@ -45,8 +45,8 @@ The API also provides information regarding service *[disruptions](https://timet
 
 ## Usage
 The Jupyter [notebook](ptv.ipynb) in this repository shows how to use the [PTVv3 class](https://github.com/r1cc4rdo/PTV_v3/blob/638a3d1f62ab8f67c67166decac6d7c42e65694c/ptvv3.py#L6) to:
-* compose, sign and make a request
-* discover bus stops from GPS coordinates
+* compose, sign and make a request,
+* discover bus stops from GPS coordinates, and
 * find realtime location of buses and expected departures.
 
 |![](media/stops.png)|![](media/buses.png)|
