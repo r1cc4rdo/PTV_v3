@@ -34,7 +34,7 @@ def routes_from_gps(ptv, gps_coordinates, radius=1500, route_types=2):
     It's complicated. A route is composed of stops, and generally has two opposite
     directions. However the paths taken by a vehicle in each direction need not to
     be the same, so there can be stops and corresponding IDs that only appear along
-    a specific direction. The opposite is also true: distict physical stops can share
+    a specific direction. The opposite is also true: distinct physical stops can share
     the same ID if close enough, typical case being opposite stops on residential roads.
     The granularity seems to be at the road intersection level, i.e. ~15 meters radius.
     
