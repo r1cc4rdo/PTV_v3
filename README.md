@@ -43,8 +43,10 @@ Intuitively, these are the API concepts:
 
 The API also provides information regarding service *[disruptions](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Disruptions)*, *[fare estimates](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/FareEstimate)* and *[station facilities](https://timetableapi.ptv.vic.gov.au/swagger/ui/index#!/Stops)*.
 
+A more detailed description of the relation between stops, directions and routes can be found in [here](https://github.com/r1cc4rdo/PTV_v3/blob/main/utils.py#L34).
+
 ## Usage
-The Jupyter [notebook](ptv.ipynb) in this repository shows how to use the [PTVv3 class](https://github.com/r1cc4rdo/PTV_v3/blob/638a3d1f62ab8f67c67166decac6d7c42e65694c/ptvv3.py#L6) to:
+The Jupyter [notebook](ptv.ipynb) in this repository shows how to use the [PTVv3 class](https://github.com/r1cc4rdo/PTV_v3/blob/main/ptvv3.py) to:
 * compose, sign and make a request,
 * discover bus stops from GPS coordinates, and
 * find realtime location of buses and expected departures.
