@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from dateutil import tz
+import datetime as dt
 
 ptv = None  # Public Transport Victoria API
 gmaps = None  # Google Maps API
@@ -39,6 +40,32 @@ def parse_utc(utc_string):
         utc_string = utc_string[:26]
         
     return datetime.strptime(utc_string, utc_format).replace(tzinfo=tz.tzutc())
+
+
+def print_td(td):
+    """
+    Pretty prints time deltas.
+
+    >>> print_td(timedelta(seconds=123.456))
+    '     2:03'
+
+    >>> print_td(timedelta(seconds=-123.456))
+    '    -2:03'
+
+    >>> print_td(timedelta(seconds=3800))
+    '  1:03:20'
+    """
+    sign = ''
+    if td.days < 0:
+        sign = '-'
+        td = timedelta() - td
+
+    ts = str(td)
+    if ts.startswith('0:'):  # remove hour if 0
+        ts = ts[2:]
+    if ts.startswith('0'):  # leading 0 for minutes
+        ts = ts[1:]
+    return f'{sign + ts.split(".")[0]:>9}'  # remove fractional seconds, add sign
 
 
 def find_routes_and_stops(location, radius=1500, route_types=2):
@@ -384,7 +411,7 @@ def compute_travel_time(connections):
 
     This function updates the connections database in place and returns it.
     """
-    assert ptv, 'You need to nitialize the ptv object with setup_ptv'
+    assert ptv, 'You need to initialize the ptv object with setup_ptv'
 
     for connection in connections.values():
 
@@ -421,6 +448,57 @@ def compute_travel_time(connections):
             'avg': int(round(sum(travel_times) / len(travel_times)))}
 
     return connections
+
+
+def check_routes(connections, buffer=120):
+
+    services = {}
+    for route_id, connection in connections.items():
+
+        route_type = connection['type']
+        stop_id = connection['forward_direction']['origin']
+        direction_id = connection['forward_direction']['id']
+        
+        runs = ptv(f'/v3/runs/route/{route_id}/route_type/{route_type}', expand='VehiclePosition')
+        departures = ptv(f'/v3/departures/route_type/{route_type}/stop/{stop_id}/route/{route_id}',
+                         direction_id=direction_id, max_results=5, expand='Disruption')
+
+        active_runs = {r['run_ref']: r for r in runs['runs'] if r['vehicle_position'] is not None and r['direction_id'] == direction_id}
+
+        for departure in departures['departures']:
+            # consider adding a health indicator recording if
+            # following services are active while the present is not
+        
+            route_active = bool(active_runs)
+            run_active = departure['run_ref'] in active_runs
+            has_estimated = departure['estimated_departure_utc'] is not None
+            disruptions = [disruption['title'].strip() for disruption in departures['disruptions'].values()]
+            departure_time = parse_utc(departure['estimated_departure_utc' if has_estimated else 'scheduled_departure_utc'])
+
+            utc_now =  datetime.now(dt.timezone.utc)
+            walk_before = connection['walking'][connection['forward_direction']['origin']]
+            get_going_in = departure_time - utc_now - timedelta(seconds=walk_before + buffer)
+            
+            if get_going_in.total_seconds() < -buffer:  # alas, we lost this one :/
+                continue
+
+            trip_duration = connection['duration']['avg']
+            walk_after = connection['walking'][connection['forward_direction']['destination']]
+            arrive_by = departure_time + timedelta(seconds=trip_duration + walk_after)
+
+            services[departure['run_ref']] = {
+                'run_ref': departure['run_ref'],
+                'route_id': connection['id'],
+                'health': {
+                    'run_active': run_active,
+                    'has_estimated': has_estimated,
+                    'route_active': route_active},
+                'departure_time': departure_time,
+                'get_going_in': get_going_in,
+                'arrive_by': arrive_by,
+                'disruptions': disruptions}
+
+    return services
 
 
 if __name__ == '__main__':
