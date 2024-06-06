@@ -1,6 +1,3 @@
-const ptvId = 'your id';
-const ptvKey = 'your key';
-
 const connections =
 {
     13067:

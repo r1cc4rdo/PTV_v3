@@ -1,3 +1,13 @@
+const ptvId = localStorage.getItem('ptvId')
+const ptvKey = localStorage.getItem('ptvKey')
+
+if (!ptvId)
+{
+    localStorage.setItem('ptvId', prompt('ptvId'));
+    localStorage.setItem('ptvKey', prompt('ptvKey'));
+    location.reload();
+}
+
 const ptv = new PTVv3(ptvId, ptvKey);
 
 function formatTimeDelta(ms)
@@ -122,6 +132,25 @@ async function updateTable(services, buffer=120)
         alertsCell.title = service.disruptions.join('\n\n').trim();
     }
 }
+
+document.addEventListener('keydown', function(event)
+{
+    if (event.key === 'Escape' || event.key === 'x' || event.key === ';') // close
+    {
+        window.close();
+    }
+    if (event.key === 'r') // refresh
+    {
+        checkRoutes(services)
+    }
+    if (event.key === 'd') // delete, clear id/key from local storage
+    {
+        localStorage.removeItem('ptvId');
+        localStorage.removeItem('ptvKey');
+        alert('id/key cleared')
+    }
+});
+
 
 let services = {};
 let everActive = new Set([]);
